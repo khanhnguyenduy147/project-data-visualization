@@ -289,8 +289,8 @@ body{background:var(--bg);font-family:'Inter',sans-serif;min-height:100vh}
 
 <script type="module">
 const [D, KPI] = await Promise.all([
-  fetch('parameter_chart.json').then(r=>r.json()),
-  fetch('kpi.json').then(r=>r.json())
+  fetch('../data/parameter_chart.json').then(r=>r.json()),
+  fetch('../data/kpi.json').then(r=>r.json())
 ]);
 
 const fc = v => {
