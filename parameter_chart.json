@@ -1,0 +1,430 @@
+{
+  "_meta": {
+    "generated": "2026-06-05",
+    "curr_year": 2026,
+    "prev_year": 2025,
+    "pace_weight": 0.321236,
+    "pace_weight_pct": 32.124,
+    "pace_formula": "Σ weight(T1-T5) + weight(T6) × (5/30)"
+  },
+  "kpi_cards": [
+    {
+      "id": "revenue",
+      "label": "Doanh thu YTD",
+      "value": 212844.0,
+      "prev_value": 192180.0,
+      "annual_goal": 700586,
+      "pace_goal": 225054,
+      "yoy": 10.8,
+      "format": "currency"
+    },
+    {
+      "id": "profit",
+      "label": "Lợi nhuận YTD",
+      "value": 32627.0,
+      "prev_value": 23195.0,
+      "annual_goal": 98154,
+      "pace_goal": 31531,
+      "yoy": 40.7,
+      "format": "currency"
+    },
+    {
+      "id": "margin",
+      "label": "Biên lợi nhuận",
+      "value": 15.3,
+      "prev_value": 12.1,
+      "annual_goal": 14.000000000000002,
+      "pace_goal": 14.000000000000002,
+      "yoy": 27.0,
+      "format": "percent"
+    },
+    {
+      "id": "orders",
+      "label": "Số giao dịch",
+      "value": 989,
+      "prev_value": 755,
+      "annual_goal": null,
+      "pace_goal": null,
+      "yoy": 31.0,
+      "format": "number"
+    },
+    {
+      "id": "aov",
+      "label": "Giá trị đơn TB",
+      "value": 215.0,
+      "prev_value": 255.0,
+      "annual_goal": 800,
+      "pace_goal": 800,
+      "yoy": -15.5,
+      "format": "currency"
+    },
+    {
+      "id": "discount",
+      "label": "Chiết khấu TB",
+      "value": 16.2,
+      "prev_value": 16.3,
+      "annual_goal": null,
+      "pace_goal": null,
+      "yoy": -0.9,
+      "format": "percent"
+    }
+  ],
+  "bullet_points": [
+    {
+      "icon": "⚠️",
+      "text": "Doanh thu YTD chậm tiến độ mùa vụ 1.7 điểm % — +10.8% so cùng kỳ 2025",
+      "status": "warning"
+    },
+    {
+      "icon": "🏆",
+      "text": "Home Office dẫn đầu: 38.4% kế hoạch năm, vượt tiến độ +6.3 điểm % so kỳ vọng mùa vụ",
+      "status": "positive"
+    },
+    {
+      "icon": "🔴",
+      "text": "Furniture cần chú ý: 23.9% kế hoạch, chậm tiến độ -8.2 điểm % — cần đẩy mạnh Q3",
+      "status": "warning"
+    },
+    {
+      "icon": "✅",
+      "text": "Biên LN 15.3% — vượt mục tiêu 14%  |  Giá trị đơn TB $215 (↓ KPI $800)",
+      "status": "positive"
+    }
+  ],
+  "pace_chart": [
+    {
+      "label": "Tổng doanh thu",
+      "actual": 212844.0,
+      "annual_goal": 700586.0,
+      "pace_goal": 225054.0,
+      "pct_of_goal": 30.4,
+      "pct_pace": 32.1,
+      "delta": -1.7,
+      "status": "behind"
+    },
+    {
+      "label": "Technology",
+      "actual": 85010.0,
+      "annual_goal": 267110.0,
+      "pace_goal": 85805.0,
+      "pct_of_goal": 31.8,
+      "pct_pace": 32.1,
+      "delta": -0.3,
+      "status": "on_pace"
+    },
+    {
+      "label": "Furniture",
+      "actual": 52397.0,
+      "annual_goal": 218792.0,
+      "pace_goal": 70284.0,
+      "pct_of_goal": 23.9,
+      "pct_pace": 32.1,
+      "delta": -8.2,
+      "status": "behind"
+    },
+    {
+      "label": "Office Supplies",
+      "actual": 75438.0,
+      "annual_goal": 206013.0,
+      "pace_goal": 66179.0,
+      "pct_of_goal": 36.6,
+      "pct_pace": 32.1,
+      "delta": 4.5,
+      "status": "ahead"
+    },
+    {
+      "label": "Consumer",
+      "actual": 96191.0,
+      "annual_goal": 332488.0,
+      "pace_goal": 106807.0,
+      "pct_of_goal": 28.9,
+      "pct_pace": 32.1,
+      "delta": -3.2,
+      "status": "behind"
+    },
+    {
+      "label": "Corporate",
+      "actual": 72177.0,
+      "annual_goal": 238172.0,
+      "pace_goal": 76510.0,
+      "pct_of_goal": 30.3,
+      "pct_pace": 32.1,
+      "delta": -1.8,
+      "status": "behind"
+    },
+    {
+      "label": "Home Office",
+      "actual": 44477.0,
+      "annual_goal": 115759.0,
+      "pace_goal": 37186.0,
+      "pct_of_goal": 38.4,
+      "pct_pace": 32.1,
+      "delta": 6.3,
+      "status": "ahead"
+    }
+  ],
+  "monthly_trend": {
+    "months": [
+      "T1",
+      "T2",
+      "T3",
+      "T4",
+      "T5",
+      "T6",
+      "T7",
+      "T8",
+      "T9",
+      "T10",
+      "T11",
+      "T12"
+    ],
+    "sales_curr": [
+      43971.0,
+      20301.0,
+      58872.0,
+      36522.0,
+      44261.0,
+      8917.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "sales_prev": [
+      18542.0,
+      22979.0,
+      51716.0,
+      38750.0,
+      56988.0,
+      40345.0,
+      39262.0,
+      31115.0,
+      73410.0,
+      59688.0,
+      79412.0,
+      96999.0
+    ],
+    "profit_curr": [
+      7140.0,
+      1614.0,
+      14752.0,
+      933.0,
+      6343.0,
+      1845.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "profit_prev": [
+      2825.0,
+      5005.0,
+      3612.0,
+      2978.0,
+      8662.0,
+      4750.0,
+      4433.0,
+      2062.0,
+      9329.0,
+      16243.0,
+      4011.0,
+      17885.0
+    ],
+    "monthly_targets": [
+      21324.0,
+      26426.0,
+      59473.0,
+      44563.0,
+      65536.0,
+      46396.0,
+      45151.0,
+      35783.0,
+      84421.0,
+      68641.0,
+      91324.0,
+      111549.0
+    ],
+    "completed_months": 5,
+    "partial_month": 6,
+    "curr_year": 2026,
+    "prev_year": 2025
+  },
+  "category_mix": [
+    {
+      "label": "Furniture",
+      "value": 52397.0,
+      "profit": 1310.0,
+      "margin": 2.5,
+      "yoy": -2.2,
+      "color": "#64748B"
+    },
+    {
+      "label": "Office Supplies",
+      "value": 75438.0,
+      "profit": 14357.0,
+      "margin": 19.0,
+      "yoy": 39.5,
+      "color": "#0EA5E9"
+    },
+    {
+      "label": "Technology",
+      "value": 85010.0,
+      "profit": 16961.0,
+      "margin": 20.0,
+      "yoy": 0.5,
+      "color": "#2563EB"
+    }
+  ],
+  "region_performance": [
+    {
+      "region": "West",
+      "sales": 81355.0,
+      "profit": 15282.0,
+      "txn": 318,
+      "margin": 18.8,
+      "yoy": 77.6
+    },
+    {
+      "region": "Central",
+      "sales": 60555.0,
+      "profit": 7242.0,
+      "txn": 264,
+      "margin": 12.0,
+      "yoy": 51.0
+    },
+    {
+      "region": "East",
+      "sales": 35473.0,
+      "profit": 3924.0,
+      "txn": 244,
+      "margin": 11.1,
+      "yoy": -47.3
+    },
+    {
+      "region": "South",
+      "sales": 35461.0,
+      "profit": 6180.0,
+      "txn": 163,
+      "margin": 17.4,
+      "yoy": -8.9
+    }
+  ],
+  "top_subcategories": [
+    {
+      "label": "Phones",
+      "sales": 28476.0,
+      "profit": 3169.0,
+      "margin": 11.1,
+      "yoy": 5.7
+    },
+    {
+      "label": "Copiers",
+      "sales": 27680.0,
+      "profit": 11616.0,
+      "margin": 42.0,
+      "yoy": 142.8
+    },
+    {
+      "label": "Chairs",
+      "sales": 24488.0,
+      "profit": 2075.0,
+      "margin": 8.5,
+      "yoy": -4.7
+    },
+    {
+      "label": "Binders",
+      "sales": 20901.0,
+      "profit": 4229.0,
+      "margin": 20.2,
+      "yoy": 177.4
+    },
+    {
+      "label": "Storage",
+      "sales": 19868.0,
+      "profit": 1874.0,
+      "margin": 9.4,
+      "yoy": 2.0
+    },
+    {
+      "label": "Accessories",
+      "sales": 15993.0,
+      "profit": 4235.0,
+      "margin": 26.5,
+      "yoy": 52.7
+    },
+    {
+      "label": "Appliances",
+      "sales": 14218.0,
+      "profit": 3055.0,
+      "margin": 21.5,
+      "yoy": 146.9
+    },
+    {
+      "label": "Machines",
+      "sales": 12861.0,
+      "profit": -2060.0,
+      "margin": -16.0,
+      "yoy": -64.0
+    },
+    {
+      "label": "Tables",
+      "sales": 11338.0,
+      "profit": -1838.0,
+      "margin": -16.2,
+      "yoy": -20.0
+    },
+    {
+      "label": "Bookcases",
+      "sales": 9304.0,
+      "profit": -11.0,
+      "margin": -0.1,
+      "yoy": 76.7
+    }
+  ],
+  "quarterly": [
+    {
+      "quarter": "Q1",
+      "actual": 123145.0,
+      "prev": 93237.0,
+      "annual_goal": 107223.0,
+      "pace_goal": 107223.0,
+      "delta_vs_pace": 14.8,
+      "delta_vs_prev": 32.1,
+      "has_data": true
+    },
+    {
+      "quarter": "Q2",
+      "actual": 89699.0,
+      "prev": 136082.0,
+      "annual_goal": 156495.0,
+      "pace_goal": 156495.0,
+      "delta_vs_pace": -42.7,
+      "delta_vs_prev": -34.1,
+      "has_data": true
+    },
+    {
+      "quarter": "Q3",
+      "actual": 0.0,
+      "prev": 143787.0,
+      "annual_goal": 165355.0,
+      "pace_goal": 0,
+      "delta_vs_pace": null,
+      "delta_vs_prev": null,
+      "has_data": false
+    },
+    {
+      "quarter": "Q4",
+      "actual": 0.0,
+      "prev": 236099.0,
+      "annual_goal": 271513.0,
+      "pace_goal": 0,
+      "delta_vs_pace": null,
+      "delta_vs_prev": null,
+      "has_data": false
+    }
+  ]
+}
