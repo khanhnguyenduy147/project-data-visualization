@@ -29,7 +29,7 @@ def load_and_shift(csv_path, shift_years=9, encoding='latin1'):
     Trả về DataFrame đã parse ngày tháng. Mặc định +9 năm để
     2014–2017 → 2023–2026 (khớp chủ đề 'Dashboard 2026').
     """
-    df = pd.read_csv(csv_path, encoding=encoding)
+    df = pd.read_csv(csv_path, encoding=encoding, on_bad_lines='skip', quotechar='"', engine='python')
     df['Order Date'] = pd.to_datetime(df['Order Date'])
     df['Order Date'] = df['Order Date'].apply(lambda d: shift_date(d, shift_years))
     return df
