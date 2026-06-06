@@ -12,6 +12,16 @@
     "corporate_segment": 1.15,
     "home_office_segment": 1.1
   },
+  "historical_cagr": {
+    "total_revenue": 0.1483,
+    "furniture": 0.1107,
+    "office_supplies": 0.1748,
+    "technology": 0.1574,
+    "total_profit": 0.2355,
+    "consumer_segment": 0.0764,
+    "corporate_segment": 0.2349,
+    "home_office_segment": 0.2113
+  },
   "annual_goals": {
     "total_revenue": 700586,
     "furniture": 218792,
@@ -23,31 +33,36 @@
     "home_office_segment": 115759
   },
   "pace_goals": {
-    "total_revenue": 225054,
-    "furniture": 70284,
-    "office_supplies": 66179,
-    "technology": 85805,
-    "total_profit": 31531,
-    "consumer_segment": 106807,
-    "corporate_segment": 76510,
-    "home_office_segment": 37186
+    "total_revenue": 206900,
+    "furniture": 64614,
+    "office_supplies": 60840,
+    "technology": 78884,
+    "total_profit": 28987,
+    "consumer_segment": 98192,
+    "corporate_segment": 70338,
+    "home_office_segment": 34186
   },
-  "monthly_weights_2025": {
-    "1": 0.030437,
-    "2": 0.037719,
-    "3": 0.084891,
-    "4": 0.063607,
-    "5": 0.093544,
-    "6": 0.066225,
-    "7": 0.064448,
-    "8": 0.051075,
-    "9": 0.120501,
-    "10": 0.097976,
-    "11": 0.130353,
-    "12": 0.159222
+  "seasonality_years": [
+    2023,
+    2024,
+    2025
+  ],
+  "monthly_weights": {
+    "1": 0.032821,
+    "2": 0.024151,
+    "3": 0.094066,
+    "4": 0.064904,
+    "5": 0.068806,
+    "6": 0.063455,
+    "7": 0.065228,
+    "8": 0.062376,
+    "9": 0.14222,
+    "10": 0.076558,
+    "11": 0.151396,
+    "12": 0.15402
   },
-  "pace_weight": 0.321236,
-  "pace_weight_pct": 32.124,
+  "pace_weight": 0.295324,
+  "pace_weight_pct": 29.532,
   "formula": "pace_goal = annual_goal × [Σ weight(T1..T_prev) + weight(T_cur) × day/days_in_month]",
   "profit_margin_target": 0.14,
   "avg_order_value_target": 800.0

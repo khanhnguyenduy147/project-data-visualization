@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SuperStore — Kết quả &amp; Pace Weight</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#f0f2f5;--card:#fff;--bd:#dde1e7;--t1:#111827;--t2:#4b5563;--t3:#9ca3af;
+  --blue:#1e40af;--blue2:#3b82f6;--blue-bg:#eff6ff;--green:#166534;--green2:#16a34a;--green-bg:#f0fdf4;
+  --red:#9f1239;--red2:#dc2626;--red-bg:#fff1f2;--amber:#92400e;--amber2:#d97706;--amber-bg:#fffbeb;
+}
+html{font-size:13px;-webkit-font-smoothing:antialiased;color:var(--t1)}
+body{background:var(--bg);font-family:'Inter',sans-serif;min-height:100vh}
+.mono{font-family:'JetBrains Mono',monospace}
+.wrap{max-width:1280px;margin:0 auto;padding:18px 20px 32px}
+.hdr-title{font-size:1.15rem;font-weight:700;letter-spacing:-.3px}
+.hdr-sub{font-size:.72rem;color:var(--t2);margin-top:3px}
+.nav{display:flex;gap:6px;margin:16px 0;border-bottom:1px solid var(--bd)}
+.nav a{font-size:.74rem;font-weight:600;color:var(--t2);text-decoration:none;padding:7px 14px;border-radius:6px 6px 0 0;border:1px solid transparent;border-bottom:none;position:relative;top:1px}
+.nav a:hover{color:var(--t1);background:var(--card)}
+.nav a.active{color:var(--blue);background:var(--card);border-color:var(--bd);border-bottom:1px solid var(--card)}
+
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:8px;padding:14px 16px;margin-bottom:14px}
+.card-title{font-size:.82rem;font-weight:700}
+.card-sub{font-size:.64rem;color:var(--t3);margin:2px 0 10px}
+
+.hero{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.hero-num{font-size:2.6rem;font-weight:700;font-family:'JetBrains Mono',monospace;color:var(--blue);line-height:1}
+.hero-txt{font-size:.78rem;color:var(--t2);line-height:1.6;flex:1;min-width:240px}
+.formula{font-family:'JetBrains Mono',monospace;font-size:.72rem;background:var(--blue-bg);border:1px solid #bfdbfe;border-radius:6px;padding:8px 11px;color:var(--blue);margin-top:8px;display:inline-block}
+
+table{width:100%;border-collapse:collapse;font-size:.72rem}
+th{text-align:right;font-size:.6rem;color:var(--t3);text-transform:uppercase;letter-spacing:.04em;padding:5px 6px;border-bottom:1px solid var(--bd)}
+th:first-child,td:first-child{text-align:left}
+td{padding:5px 6px;border-bottom:1px solid #f1f5f9;font-family:'JetBrains Mono',monospace}
+td.name{font-family:'Inter',sans-serif;font-weight:500}
+tr:last-child td{border-bottom:none}
+.neg{color:var(--red2)}.pos{color:var(--green2)}
+.done{background:var(--blue-bg)}
+.badge{display:inline-block;font-size:.6rem;font-weight:600;padding:1px 8px;border-radius:10px}
+.badge.ahead{color:var(--green);background:var(--green-bg)}
+.badge.behind{color:var(--amber);background:var(--amber-bg)}
+.badge.on_pace{color:var(--t2);background:#f1f5f9}
+.mbox{display:flex;gap:16px;flex-wrap:wrap;align-items:center}
+.mstat{text-align:center;padding:6px 14px}
+.mstat .v{font-size:1.5rem;font-weight:700;font-family:'JetBrains Mono',monospace}
+.mstat .l{font-size:.6rem;color:var(--t3);text-transform:uppercase}
+.callout{background:var(--amber-bg);border-left:3px solid var(--amber2);border-radius:5px;padding:9px 12px;font-size:.74rem;color:var(--amber);margin-top:10px;line-height:1.5}
+.footer{margin-top:18px;padding-top:12px;border-top:1px solid var(--bd);font-size:.62rem;color:var(--t3);text-align:center;line-height:1.8}
+@media(max-width:960px){.grid2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hdr-title">🎯 Kết quả &amp; Pace Weight</div>
+  <div class="hdr-sub">Giải thích tiến độ mùa vụ (pace weight) và biên lợi nhuận — cơ sở của mọi KPI trên dashboard</div>
+
+  <nav class="nav">
+    <a href="index.html">📊 Dashboard</a>
+    <a href="analyse.html">🔍 Phân tích (EDA)</a>
+    <a href="result.html" class="active">🎯 Kết quả &amp; Pace</a>
+  </nav>
+
+  <!-- PACE WEIGHT HERO -->
+  <div class="card">
+    <div class="card-title">Pace Weight — tiến độ kỳ vọng theo mùa vụ</div>
+    <div class="card-sub" id="paceSub"></div>
+    <div class="hero">
+      <div class="hero-num" id="paceNum"></div>
+      <div class="hero-txt" id="paceTxt"></div>
+    </div>
+    <div class="formula" id="paceFormula"></div>
+  </div>
+
+  <!-- MONTHLY WEIGHTS -->
+  <div class="card">
+    <div class="card-title">Trọng số mùa vụ từng tháng (trung bình nhiều năm)</div>
+    <div class="card-sub" id="weightSub"></div>
+    <table id="weightTable"><thead><tr><th>Tháng</th><th>Trọng số</th><th>Lũy kế</th><th>Trạng thái</th></tr></thead><tbody></tbody></table>
+  </div>
+
+  <!-- PACE CHART TABLE -->
+  <div class="card">
+    <div class="card-title">Tiến độ thực tế vs KPI mùa vụ</div>
+    <div class="card-sub">% đạt so kế hoạch năm, đối chiếu % kỳ vọng tại thời điểm hiện tại</div>
+    <table id="paceTable"><thead><tr><th>Chỉ số</th><th>Thực tế</th><th>KPI hiện tại</th><th>KH năm</th><th>% đạt</th><th>% kỳ vọng</th><th>Δ (điểm %)</th><th>Trạng thái</th></tr></thead><tbody></tbody></table>
+  </div>
+
+  <div class="grid2">
+    <!-- MARGIN EXPLANATION -->
+    <div class="card">
+      <div class="card-title">Giải thích biên lợi nhuận</div>
+      <div class="card-sub">Biên LN = Lợi nhuận ÷ Doanh thu</div>
+      <div class="mbox" id="marginBox"></div>
+      <div class="callout" id="marginCallout"></div>
+    </div>
+    <!-- CAGR JUSTIFY -->
+    <div class="card">
+      <div class="card-title">Biện minh mục tiêu tăng trưởng (CAGR)</div>
+      <div class="card-sub">Mục tiêu vs tăng trưởng kép lịch sử</div>
+      <table id="cagrTable"><thead><tr><th>Chỉ số</th><th>CAGR LS</th><th>Mục tiêu</th><th>Đánh giá</th></tr></thead><tbody></tbody></table>
+    </div>
+  </div>
+
+  <div class="footer">Nguồn: <span class="mono">parameter_chart.json</span>, <span class="mono">kpi.json</span>, <span class="mono">analysis.json</span></div>
+</div>
+
+<script type="module">
+const [D, KPI, A] = await Promise.all([
+  fetch('parameter_chart.json').then(r=>r.json()),
+  fetch('kpi.json').then(r=>r.json()),
+  fetch('analysis.json').then(r=>r.json()),
+]);
+const fc = v => { const a=Math.abs(v), s=v<0?'-':''; if(a>=1e6)return s+'$'+(a/1e6).toFixed(1)+'M'; if(a>=1e3)return s+'$'+(a/1e3).toFixed(0)+'K'; return s+'$'+a.toFixed(0); };
+const el = id => document.getElementById(id);
+const tb = id => el(id).querySelector('tbody');
+const meta = D._meta;
+
+// Linear baseline từ ngày generated
+const gd = new Date(meta.generated);
+const linPct = ((gd - new Date(gd.getFullYear(),0,1)) / (1000*3600*24) / 365 * 100);
+
+// HERO
+el('paceSub').textContent = `Năm ${meta.curr_year} · tính đến ${meta.generated} · trọng số trung bình các năm ${(meta.seasonality_years||[]).join(', ')}`;
+el('paceNum').textContent = meta.pace_weight_pct.toFixed(1)+'%';
+el('paceTxt').innerHTML = `Đây là tỷ lệ kế hoạch năm <b>lẽ ra phải đạt được</b> tính đến hiện tại, theo phân bổ mùa vụ. `
+  + `So với cách chia tuyến tính (${linPct.toFixed(1)}%), pace weight <b>thấp hơn ${(linPct-meta.pace_weight_pct).toFixed(1)} điểm %</b> vì nửa cuối năm mới là mùa cao điểm — nếu dùng tuyến tính sẽ <b>đánh giá sai</b> là đang chậm tiến độ.`;
+el('paceFormula').textContent = 'pace_weight = ' + meta.pace_formula;
+
+// MONTHLY WEIGHTS
+const w = KPI.monthly_weights;
+const cutMonth = D.monthly_trend.partial_month;   // tháng đang chạy (T1..cutMonth-1 đã xong)
+el('weightSub').innerHTML = `Trung bình các năm ${(meta.seasonality_years||[]).join(', ')} · <span class="mono">${KPI.formula}</span>`;
+let cum=0;
+tb('weightTable').innerHTML = Array.from({length:12},(_,i)=>{
+  const mo=i+1, val=w[mo]*100; cum+=val;
+  const status = mo<cutMonth ? '<span class="badge ahead">đã xong</span>'
+    : mo===cutMonth ? '<span class="badge behind">đang chạy</span>'
+    : '<span style="color:var(--t3)">—</span>';
+  return `<tr class="${mo<=cutMonth?'done':''}"><td class="name">T${mo}</td><td>${val.toFixed(2)}%</td><td>${cum.toFixed(2)}%</td><td>${status}</td></tr>`;
+}).join('');
+
+// PACE CHART TABLE
+const lbl={ahead:'Vượt KPI',behind:'Chậm KPI',on_pace:'Đúng KPI'};
+tb('paceTable').innerHTML = D.pace_chart.map(p=>
+  `<tr><td class="name">${p.label}</td><td>${fc(p.actual)}</td><td>${fc(p.pace_goal)}</td><td>${fc(p.annual_goal)}</td>`
+  +`<td>${p.pct_of_goal}%</td><td style="color:var(--t3)">${p.pct_pace}%</td>`
+  +`<td class="${p.delta>=0?'pos':'neg'}">${p.delta>=0?'+':''}${p.delta}</td>`
+  +`<td><span class="badge ${p.status}">${lbl[p.status]}</span></td></tr>`).join('');
+
+// MARGIN
+const mc = D.kpi_cards.find(c=>c.id==='margin');
+const target = KPI.profit_margin_target*100;
+const ok = mc.value>=target;
+el('marginBox').innerHTML =
+  `<div class="mstat"><div class="v ${ok?'pos':'neg'}">${mc.value}%</div><div class="l">Biên LN hiện tại</div></div>`
+  +`<div class="mstat"><div class="v" style="color:var(--t2)">${target.toFixed(0)}%</div><div class="l">Mục tiêu</div></div>`
+  +`<div class="mstat"><div class="v" style="color:${mc.yoy>=0?'var(--green2)':'var(--red2)'}">${mc.yoy>=0?'+':''}${mc.yoy}%</div><div class="l">YoY</div></div>`;
+const dp=A.discount_profit;
+el('marginCallout').innerHTML = `Yếu tố phá biên lớn nhất là <b>chiết khấu</b>: tương quan Discount↔Profit = <b>${dp.corr}</b>, `
+  + `lợi nhuận TB chuyển <b>âm khi chiết khấu ≥ ${dp.threshold_pct}%</b>. `
+  + `Có <b>${A.distributions.loss_pct}%</b> đơn lỗ (tổng ${fc(A.distributions.loss_total)}) → đặt trần chiết khấu để bảo vệ biên.`;
+
+// CAGR
+const names={total_revenue:'Tổng doanh thu',furniture:'Furniture',office_supplies:'Office Supplies',technology:'Technology',total_profit:'Lợi nhuận',consumer_segment:'Consumer',corporate_segment:'Corporate',home_office_segment:'Home Office'};
+tb('cagrTable').innerHTML = Object.entries(KPI.historical_cagr).map(([k,g])=>{
+  const t=(KPI.growth_targets[k]-1)*100, gp=g==null?null:g*100;
+  let verdict='<span class="badge on_pace">n/a</span>';
+  if(gp!=null){
+    if(t>gp+2) verdict='<span class="badge behind">Tham vọng</span>';
+    else if(t<gp-2) verdict='<span class="badge ahead">Thận trọng</span>';
+    else verdict='<span class="badge on_pace">Sát LS</span>';
+  }
+  return `<tr><td class="name">${names[k]||k}</td><td>${gp==null?'—':(gp>=0?'+':'')+gp.toFixed(1)+'%'}</td>`
+    +`<td>+${t.toFixed(1)}%</td><td>${verdict}</td></tr>`;
+}).join('');
+</script>
+</body>
+</html>

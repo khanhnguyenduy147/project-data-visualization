@@ -3,9 +3,14 @@
     "generated": "2026-06-05",
     "curr_year": 2026,
     "prev_year": 2025,
-    "pace_weight": 0.321236,
-    "pace_weight_pct": 32.124,
-    "pace_formula": "Σ weight(T1-T5) + weight(T6) × (5/30)"
+    "pace_weight": 0.295324,
+    "pace_weight_pct": 29.532,
+    "pace_formula": "Σ weight(T1-T5) + weight(T6) × (5/30)",
+    "seasonality_years": [
+      2023,
+      2024,
+      2025
+    ]
   },
   "kpi_cards": [
     {
@@ -14,7 +19,7 @@
       "value": 212844.0,
       "prev_value": 192180.0,
       "annual_goal": 700586,
-      "pace_goal": 225054,
+      "pace_goal": 206900,
       "yoy": 10.8,
       "format": "currency"
     },
@@ -24,7 +29,7 @@
       "value": 32627.0,
       "prev_value": 23195.0,
       "annual_goal": 98154,
-      "pace_goal": 31531,
+      "pace_goal": 28987,
       "yoy": 40.7,
       "format": "currency"
     },
@@ -71,18 +76,18 @@
   ],
   "bullet_points": [
     {
-      "icon": "⚠️",
-      "text": "Doanh thu YTD chậm tiến độ mùa vụ 1.7 điểm % — +10.8% so cùng kỳ 2025",
-      "status": "warning"
+      "icon": "📈",
+      "text": "Doanh thu YTD vượt tiến độ mùa vụ 0.9 điểm % — +10.8% so cùng kỳ 2025",
+      "status": "positive"
     },
     {
       "icon": "🏆",
-      "text": "Home Office dẫn đầu: 38.4% kế hoạch năm, vượt tiến độ +6.3 điểm % so kỳ vọng mùa vụ",
+      "text": "Home Office dẫn đầu: 38.4% kế hoạch năm, vượt tiến độ +8.9 điểm % so kỳ vọng mùa vụ",
       "status": "positive"
     },
     {
       "icon": "🔴",
-      "text": "Furniture cần chú ý: 23.9% kế hoạch, chậm tiến độ -8.2 điểm % — cần đẩy mạnh Q3",
+      "text": "Furniture cần chú ý: 23.9% kế hoạch, chậm tiến độ -5.6 điểm % — cần đẩy mạnh Q3",
       "status": "warning"
     },
     {
@@ -96,70 +101,70 @@
       "label": "Tổng doanh thu",
       "actual": 212844.0,
       "annual_goal": 700586.0,
-      "pace_goal": 225054.0,
+      "pace_goal": 206900.0,
       "pct_of_goal": 30.4,
-      "pct_pace": 32.1,
-      "delta": -1.7,
-      "status": "behind"
+      "pct_pace": 29.5,
+      "delta": 0.9,
+      "status": "on_pace"
     },
     {
       "label": "Technology",
       "actual": 85010.0,
       "annual_goal": 267110.0,
-      "pace_goal": 85805.0,
+      "pace_goal": 78884.0,
       "pct_of_goal": 31.8,
-      "pct_pace": 32.1,
-      "delta": -0.3,
-      "status": "on_pace"
+      "pct_pace": 29.5,
+      "delta": 2.3,
+      "status": "ahead"
     },
     {
       "label": "Furniture",
       "actual": 52397.0,
       "annual_goal": 218792.0,
-      "pace_goal": 70284.0,
+      "pace_goal": 64614.0,
       "pct_of_goal": 23.9,
-      "pct_pace": 32.1,
-      "delta": -8.2,
+      "pct_pace": 29.5,
+      "delta": -5.6,
       "status": "behind"
     },
     {
       "label": "Office Supplies",
       "actual": 75438.0,
       "annual_goal": 206013.0,
-      "pace_goal": 66179.0,
+      "pace_goal": 60840.0,
       "pct_of_goal": 36.6,
-      "pct_pace": 32.1,
-      "delta": 4.5,
+      "pct_pace": 29.5,
+      "delta": 7.1,
       "status": "ahead"
     },
     {
       "label": "Consumer",
       "actual": 96191.0,
       "annual_goal": 332488.0,
-      "pace_goal": 106807.0,
+      "pace_goal": 98192.0,
       "pct_of_goal": 28.9,
-      "pct_pace": 32.1,
-      "delta": -3.2,
-      "status": "behind"
+      "pct_pace": 29.5,
+      "delta": -0.6,
+      "status": "on_pace"
     },
     {
       "label": "Corporate",
       "actual": 72177.0,
       "annual_goal": 238172.0,
-      "pace_goal": 76510.0,
+      "pace_goal": 70338.0,
       "pct_of_goal": 30.3,
-      "pct_pace": 32.1,
-      "delta": -1.8,
-      "status": "behind"
+      "pct_pace": 29.5,
+      "delta": 0.8,
+      "status": "on_pace"
     },
     {
       "label": "Home Office",
       "actual": 44477.0,
       "annual_goal": 115759.0,
-      "pace_goal": 37186.0,
+      "pace_goal": 34186.0,
       "pct_of_goal": 38.4,
-      "pct_pace": 32.1,
-      "delta": 6.3,
+      "pct_pace": 29.5,
+      "delta": 8.9,
       "status": "ahead"
     }
   ],
@@ -235,18 +240,18 @@
       17885.0
     ],
     "monthly_targets": [
-      21324.0,
-      26426.0,
-      59473.0,
-      44563.0,
-      65536.0,
-      46396.0,
-      45151.0,
-      35783.0,
-      84421.0,
-      68641.0,
-      91324.0,
-      111549.0
+      22994.0,
+      16920.0,
+      65902.0,
+      45471.0,
+      48204.0,
+      44456.0,
+      45698.0,
+      43700.0,
+      99637.0,
+      53635.0,
+      106066.0,
+      107904.0
     ],
     "completed_months": 5,
     "partial_month": 6,
@@ -390,9 +395,9 @@
       "quarter": "Q1",
       "actual": 123145.0,
       "prev": 93237.0,
-      "annual_goal": 107223.0,
-      "pace_goal": 107223.0,
-      "delta_vs_pace": 14.8,
+      "annual_goal": 105815.0,
+      "pace_goal": 105815.0,
+      "delta_vs_pace": 16.4,
       "delta_vs_prev": 32.1,
       "has_data": true
     },
@@ -400,9 +405,9 @@
       "quarter": "Q2",
       "actual": 89699.0,
       "prev": 136082.0,
-      "annual_goal": 156495.0,
-      "pace_goal": 156495.0,
-      "delta_vs_pace": -42.7,
+      "annual_goal": 138131.0,
+      "pace_goal": 138131.0,
+      "delta_vs_pace": -35.1,
       "delta_vs_prev": -34.1,
       "has_data": true
     },
@@ -410,7 +415,7 @@
       "quarter": "Q3",
       "actual": 0.0,
       "prev": 143787.0,
-      "annual_goal": 165355.0,
+      "annual_goal": 189034.0,
       "pace_goal": 0,
       "delta_vs_pace": null,
       "delta_vs_prev": null,
@@ -420,7 +425,7 @@
       "quarter": "Q4",
       "actual": 0.0,
       "prev": 236099.0,
-      "annual_goal": 271513.0,
+      "annual_goal": 267605.0,
       "pace_goal": 0,
       "delta_vs_pace": null,
       "delta_vs_prev": null,

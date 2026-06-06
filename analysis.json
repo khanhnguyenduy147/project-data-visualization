@@ -1,0 +1,338 @@
+{
+  "_meta": {
+    "generated": "2026-06-06 19:09",
+    "shift_years": 9,
+    "date_range": "2023-01-03 → 2026-12-30",
+    "rows": 9994,
+    "orders": 5009,
+    "customers": 793,
+    "n_columns": 20
+  },
+  "data_quality": {
+    "missing_total": 0,
+    "duplicates": 0
+  },
+  "distributions": {
+    "skew_sales": 12.97,
+    "skew_profit": 7.56,
+    "loss_orders": 1871,
+    "loss_pct": 18.7,
+    "loss_total": -156131.0,
+    "profit_total": 442528.0,
+    "net_profit": 286397.0
+  },
+  "loss_by_subcategory": [
+    {
+      "label": "Binders",
+      "loss": -38510.0
+    },
+    {
+      "label": "Tables",
+      "loss": -32412.0
+    },
+    {
+      "label": "Machines",
+      "loss": -30119.0
+    },
+    {
+      "label": "Bookcases",
+      "loss": -12152.0
+    },
+    {
+      "label": "Chairs",
+      "loss": -9881.0
+    },
+    {
+      "label": "Appliances",
+      "loss": -8630.0
+    }
+  ],
+  "discount_profit": {
+    "corr": -0.219,
+    "threshold_pct": 30.0,
+    "by_discount": [
+      {
+        "discount": 0.0,
+        "avg_profit": 66.9,
+        "n": 4798
+      },
+      {
+        "discount": 10.0,
+        "avg_profit": 96.1,
+        "n": 94
+      },
+      {
+        "discount": 15.0,
+        "avg_profit": 27.3,
+        "n": 52
+      },
+      {
+        "discount": 20.0,
+        "avg_profit": 24.7,
+        "n": 3657
+      },
+      {
+        "discount": 30.0,
+        "avg_profit": -45.7,
+        "n": 227
+      },
+      {
+        "discount": 32.0,
+        "avg_profit": -88.6,
+        "n": 27
+      },
+      {
+        "discount": 40.0,
+        "avg_profit": -111.9,
+        "n": 206
+      },
+      {
+        "discount": 45.0,
+        "avg_profit": -226.6,
+        "n": 11
+      },
+      {
+        "discount": 50.0,
+        "avg_profit": -310.7,
+        "n": 66
+      },
+      {
+        "discount": 60.0,
+        "avg_profit": -43.1,
+        "n": 138
+      },
+      {
+        "discount": 70.0,
+        "avg_profit": -95.9,
+        "n": 418
+      },
+      {
+        "discount": 80.0,
+        "avg_profit": -101.8,
+        "n": 300
+      }
+    ]
+  },
+  "category": [
+    {
+      "label": "Technology",
+      "sales": 836154.0,
+      "profit": 145455.0,
+      "margin": 17.4
+    },
+    {
+      "label": "Furniture",
+      "sales": 742000.0,
+      "profit": 18451.0,
+      "margin": 2.5
+    },
+    {
+      "label": "Office Supplies",
+      "sales": 719047.0,
+      "profit": 122491.0,
+      "margin": 17.0
+    }
+  ],
+  "subcategory_margin": [
+    {
+      "label": "Tables",
+      "sales": 206966.0,
+      "profit": -17725.0,
+      "margin": -8.6
+    },
+    {
+      "label": "Bookcases",
+      "sales": 114880.0,
+      "profit": -3473.0,
+      "margin": -3.0
+    },
+    {
+      "label": "Supplies",
+      "sales": 46674.0,
+      "profit": -1189.0,
+      "margin": -2.5
+    },
+    {
+      "label": "Machines",
+      "sales": 189239.0,
+      "profit": 3385.0,
+      "margin": 1.8
+    },
+    {
+      "label": "Chairs",
+      "sales": 328449.0,
+      "profit": 26590.0,
+      "margin": 8.1
+    },
+    {
+      "label": "Storage",
+      "sales": 223844.0,
+      "profit": 21279.0,
+      "margin": 9.5
+    },
+    {
+      "label": "Phones",
+      "sales": 330007.0,
+      "profit": 44516.0,
+      "margin": 13.5
+    },
+    {
+      "label": "Furnishings",
+      "sales": 91705.0,
+      "profit": 13059.0,
+      "margin": 14.2
+    },
+    {
+      "label": "Binders",
+      "sales": 203413.0,
+      "profit": 30222.0,
+      "margin": 14.9
+    },
+    {
+      "label": "Appliances",
+      "sales": 107532.0,
+      "profit": 18138.0,
+      "margin": 16.9
+    },
+    {
+      "label": "Art",
+      "sales": 27119.0,
+      "profit": 6528.0,
+      "margin": 24.1
+    },
+    {
+      "label": "Accessories",
+      "sales": 167380.0,
+      "profit": 41937.0,
+      "margin": 25.1
+    },
+    {
+      "label": "Fasteners",
+      "sales": 3024.0,
+      "profit": 950.0,
+      "margin": 31.4
+    },
+    {
+      "label": "Copiers",
+      "sales": 149528.0,
+      "profit": 55618.0,
+      "margin": 37.2
+    },
+    {
+      "label": "Envelopes",
+      "sales": 16476.0,
+      "profit": 6964.0,
+      "margin": 42.3
+    },
+    {
+      "label": "Paper",
+      "sales": 78479.0,
+      "profit": 34054.0,
+      "margin": 43.4
+    },
+    {
+      "label": "Labels",
+      "sales": 12486.0,
+      "profit": 5546.0,
+      "margin": 44.4
+    }
+  ],
+  "region": [
+    {
+      "region": "West",
+      "sales": 725458.0,
+      "profit": 108418.0,
+      "margin": 14.9,
+      "txn": 3203
+    },
+    {
+      "region": "East",
+      "sales": 678781.0,
+      "profit": 91523.0,
+      "margin": 13.5,
+      "txn": 2848
+    },
+    {
+      "region": "Central",
+      "sales": 501240.0,
+      "profit": 39706.0,
+      "margin": 7.9,
+      "txn": 2323
+    },
+    {
+      "region": "South",
+      "sales": 391722.0,
+      "profit": 46749.0,
+      "margin": 11.9,
+      "txn": 1620
+    }
+  ],
+  "seasonality": {
+    "years": [
+      2023,
+      2024,
+      2025,
+      2026
+    ],
+    "weights_by_year": {
+      "2023": [
+        2.94,
+        0.93,
+        11.5,
+        5.84,
+        4.88,
+        7.14,
+        7.01,
+        5.76,
+        16.89,
+        6.5,
+        16.24,
+        14.36
+      ],
+      "2024": [
+        3.86,
+        2.54,
+        8.23,
+        7.27,
+        6.4,
+        5.27,
+        6.11,
+        7.84,
+        13.73,
+        6.67,
+        16.15,
+        15.92
+      ],
+      "2025": [
+        3.04,
+        3.77,
+        8.49,
+        6.36,
+        9.35,
+        6.62,
+        6.44,
+        5.11,
+        12.05,
+        9.8,
+        13.04,
+        15.92
+      ],
+      "2026": [
+        6.0,
+        2.77,
+        8.03,
+        4.98,
+        6.04,
+        7.23,
+        6.17,
+        8.61,
+        11.98,
+        10.61,
+        16.15,
+        11.43
+      ]
+    },
+    "max_spread_pct": 4.9,
+    "max_spread_month": "T9"
+  }
+}

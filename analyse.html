@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SuperStore — Phân tích dữ liệu (EDA)</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#f0f2f5;--card:#fff;--bd:#dde1e7;--t1:#111827;--t2:#4b5563;--t3:#9ca3af;
+  --blue:#1e40af;--blue2:#3b82f6;--blue-bg:#eff6ff;--green:#166534;--green-bg:#f0fdf4;
+  --red:#9f1239;--red2:#dc2626;--red-bg:#fff1f2;--amber:#92400e;--amber-bg:#fffbeb;
+}
+html{font-size:13px;-webkit-font-smoothing:antialiased;color:var(--t1)}
+body{background:var(--bg);font-family:'Inter',sans-serif;min-height:100vh}
+.mono{font-family:'JetBrains Mono',monospace}
+.wrap{max-width:1280px;margin:0 auto;padding:18px 20px 32px}
+.hdr-title{font-size:1.15rem;font-weight:700;letter-spacing:-.3px}
+.hdr-sub{font-size:.72rem;color:var(--t2);margin-top:3px}
+.nav{display:flex;gap:6px;margin:16px 0;border-bottom:1px solid var(--bd)}
+.nav a{font-size:.74rem;font-weight:600;color:var(--t2);text-decoration:none;padding:7px 14px;border-radius:6px 6px 0 0;border:1px solid transparent;border-bottom:none;position:relative;top:1px}
+.nav a:hover{color:var(--t1);background:var(--card)}
+.nav a.active{color:var(--blue);background:var(--card);border-color:var(--bd);border-bottom:1px solid var(--card)}
+
+.stat-row{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-bottom:16px}
+.stat{background:var(--card);border:1px solid var(--bd);border-radius:8px;padding:11px 13px}
+.stat-lbl{font-size:.6rem;color:var(--t3);text-transform:uppercase;letter-spacing:.05em}
+.stat-val{font-size:1.05rem;font-weight:700;font-family:'JetBrains Mono',monospace;margin-top:3px}
+.stat-val.bad{color:var(--red2)}.stat-val.good{color:var(--green)}
+
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:8px;padding:14px 16px}
+.card-title{font-size:.82rem;font-weight:700}
+.card-sub{font-size:.64rem;color:var(--t3);margin:2px 0 10px}
+table{width:100%;border-collapse:collapse;font-size:.72rem}
+th{text-align:right;font-size:.6rem;color:var(--t3);text-transform:uppercase;letter-spacing:.04em;padding:5px 6px;border-bottom:1px solid var(--bd)}
+th:first-child,td:first-child{text-align:left}
+td{padding:5px 6px;border-bottom:1px solid #f1f5f9;font-family:'JetBrains Mono',monospace}
+td.name{font-family:'Inter',sans-serif;font-weight:500}
+tr:last-child td{border-bottom:none}
+.neg{color:var(--red2)}.pos{color:var(--green2,#16a34a)}
+.tag{display:inline-block;font-size:.6rem;font-weight:600;padding:1px 7px;border-radius:10px}
+.tag.bad{color:var(--red);background:var(--red-bg)}.tag.ok{color:var(--green);background:var(--green-bg)}
+.bar{height:7px;border-radius:3px;background:var(--blue2);display:inline-block;vertical-align:middle}
+.callout{background:var(--amber-bg);border-left:3px solid var(--amber);border-radius:5px;padding:9px 12px;font-size:.74rem;color:var(--amber);margin-bottom:14px;line-height:1.5}
+.footer{margin-top:18px;padding-top:12px;border-top:1px solid var(--bd);font-size:.62rem;color:var(--t3);text-align:center;line-height:1.8}
+@media(max-width:960px){.stat-row{grid-template-columns:repeat(3,1fr)}.grid2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hdr-title">🔍 Phân tích dữ liệu (EDA)</div>
+  <div class="hdr-sub">Tổng quan khám phá dữ liệu SuperStore — chất lượng, phân phối, đơn lỗ, quan hệ Discount→Profit, mùa vụ</div>
+
+  <nav class="nav">
+    <a href="index.html">📊 Dashboard</a>
+    <a href="analyse.html" class="active">🔍 Phân tích (EDA)</a>
+    <a href="result.html">🎯 Kết quả &amp; Pace</a>
+  </nav>
+
+  <div class="callout" id="callout"></div>
+
+  <!-- STAT CARDS -->
+  <div class="stat-row" id="statRow"></div>
+
+  <div class="grid2">
+    <!-- DISCOUNT -> PROFIT -->
+    <div class="card">
+      <div class="card-title">Lợi nhuận TB theo mức chiết khấu ⭐</div>
+      <div class="card-sub">Phát hiện cốt lõi: chiết khấu cao kéo lợi nhuận về âm</div>
+      <table id="discTable"><thead><tr><th>Discount</th><th>Lợi nhuận TB</th><th>Số đơn</th></tr></thead><tbody></tbody></table>
+    </div>
+    <!-- LOSS BY SUBCAT -->
+    <div class="card">
+      <div class="card-title">Top nhóm sản phẩm lỗ nhiều nhất</div>
+      <div class="card-sub">Tổng lợi nhuận âm theo Sub-Category</div>
+      <table id="lossTable"><thead><tr><th>Sub-Category</th><th>Tổng lỗ</th></tr></thead><tbody></tbody></table>
+    </div>
+  </div>
+
+  <div class="grid2">
+    <!-- CATEGORY -->
+    <div class="card">
+      <div class="card-title">Cơ cấu &amp; biên LN theo Category</div>
+      <div class="card-sub">Doanh thu, lợi nhuận, biên lợi nhuận</div>
+      <table id="catTable"><thead><tr><th>Category</th><th>Doanh thu</th><th>Lợi nhuận</th><th>Biên</th></tr></thead><tbody></tbody></table>
+    </div>
+    <!-- REGION -->
+    <div class="card">
+      <div class="card-title">Hiệu suất theo khu vực</div>
+      <div class="card-sub">Sắp theo doanh thu</div>
+      <table id="regTable"><thead><tr><th>Region</th><th>Doanh thu</th><th>Biên</th><th>Số đơn</th></tr></thead><tbody></tbody></table>
+    </div>
+  </div>
+
+  <!-- SUBCATEGORY MARGIN -->
+  <div class="card" style="margin-bottom:14px">
+    <div class="card-title">Biên lợi nhuận theo Sub-Category (thấp → cao)</div>
+    <div class="card-sub">Nhóm có biên âm là ứng viên cần rà soát giá / chiết khấu</div>
+    <table id="subTable"><thead><tr><th>Sub-Category</th><th>Doanh thu</th><th>Lợi nhuận</th><th>Biên LN</th><th></th></tr></thead><tbody></tbody></table>
+  </div>
+
+  <!-- SEASONALITY -->
+  <div class="card">
+    <div class="card-title">Tính ổn định mùa vụ qua các năm</div>
+    <div class="card-sub" id="seasonSub"></div>
+    <table id="seasonTable"><thead><tr id="seasonHead"><th>Năm</th></tr></thead><tbody></tbody></table>
+  </div>
+
+  <div class="footer">Nguồn: <span class="mono">analysis.json</span> (sinh bởi <span class="mono">src/export_analysis.py</span>) &nbsp;·&nbsp; SuperStore Dataset</div>
+</div>
+
+<script type="module">
+const A = await fetch('analysis.json').then(r=>r.json());
+const fc = v => { const a=Math.abs(v), s=v<0?'-':''; if(a>=1e6)return s+'$'+(a/1e6).toFixed(1)+'M'; if(a>=1e3)return s+'$'+(a/1e3).toFixed(0)+'K'; return s+'$'+a.toFixed(0); };
+const el = id => document.getElementById(id);
+const tb = id => el(id).querySelector('tbody');
+
+// Callout
+const dp = A.discount_profit, d = A.distributions;
+el('callout').innerHTML = `⚠️ <b>${d.loss_pct}%</b> đơn hàng đang lỗ (tổng lỗ <b>${fc(d.loss_total)}</b>). `
+  + `Tương quan Discount↔Profit = <b>${dp.corr}</b>; lợi nhuận TB chuyển <b>âm khi chiết khấu ≥ ${dp.threshold_pct}%</b>.`;
+
+// Stat cards
+const m = A._meta;
+const stats = [
+  ['Số dòng', m.rows.toLocaleString(), ''],
+  ['Số đơn', m.orders.toLocaleString(), ''],
+  ['Khách hàng', m.customers.toLocaleString(), ''],
+  ['Giá trị thiếu', A.data_quality.missing_total, A.data_quality.missing_total? 'bad':'good'],
+  ['Đơn lỗ', d.loss_pct+'%', 'bad'],
+  ['Lợi nhuận ròng', fc(d.net_profit), 'good'],
+];
+el('statRow').innerHTML = stats.map(([l,v,c])=>`<div class="stat"><div class="stat-lbl">${l}</div><div class="stat-val ${c}">${v}</div></div>`).join('');
+
+// Discount table (highlight negative avg profit)
+const maxN = Math.max(...dp.by_discount.map(r=>r.n));
+tb('discTable').innerHTML = dp.by_discount.map(r=>{
+  const neg = r.avg_profit<0;
+  return `<tr><td>${r.discount}%</td><td class="${neg?'neg':'pos'}">${fc(r.avg_profit)}</td>`
+    + `<td style="color:var(--t3)">${r.n.toLocaleString()} <span class="bar" style="width:${r.n/maxN*40}px;opacity:.5"></span></td></tr>`;
+}).join('');
+
+// Loss by subcategory
+tb('lossTable').innerHTML = A.loss_by_subcategory.map(r=>
+  `<tr><td class="name">${r.label}</td><td class="neg">${fc(r.loss)}</td></tr>`).join('');
+
+// Category
+tb('catTable').innerHTML = A.category.map(r=>
+  `<tr><td class="name">${r.label}</td><td>${fc(r.sales)}</td><td>${fc(r.profit)}</td>`
+  +`<td class="${r.margin<0?'neg':'pos'}">${r.margin}%</td></tr>`).join('');
+
+// Region
+tb('regTable').innerHTML = A.region.map(r=>
+  `<tr><td class="name">${r.region}</td><td>${fc(r.sales)}</td>`
+  +`<td class="${r.margin<0?'neg':'pos'}">${r.margin}%</td><td style="color:var(--t3)">${r.txn.toLocaleString()}</td></tr>`).join('');
+
+// Subcategory margin
+tb('subTable').innerHTML = A.subcategory_margin.map(r=>{
+  const neg=r.margin<0;
+  return `<tr><td class="name">${r.label}</td><td>${fc(r.sales)}</td><td class="${neg?'neg':''}">${fc(r.profit)}</td>`
+    +`<td class="${neg?'neg':'pos'}">${r.margin}%</td><td><span class="tag ${neg?'bad':'ok'}">${neg?'biên âm':'ok'}</span></td></tr>`;
+}).join('');
+
+// Seasonality
+const s = A.seasonality;
+el('seasonSub').innerHTML = `Trọng số doanh thu (%) từng tháng theo năm — chênh lệch lớn nhất chỉ <b>${s.max_spread_pct} điểm %</b> (${s.max_spread_month}) ⇒ mùa vụ khá ổn định.`;
+el('seasonHead').innerHTML = '<th>Năm</th>' + Array.from({length:12},(_,i)=>`<th>T${i+1}</th>`).join('');
+tb('seasonTable').innerHTML = s.years.map(y=>
+  `<tr><td class="name">${y}</td>` + s.weights_by_year[y].map(w=>`<td>${w}</td>`).join('') + `</tr>`).join('');
+</script>
+</body>
+</html>
