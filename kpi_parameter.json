@@ -1,0 +1,15 @@
+{
+  "_note": "Mục tiêu lãnh đạo đưa",
+  "growth_targets": {
+    "total_revenue":       1.15,
+    "furniture":           1.10,
+    "office_supplies":     1.12,
+    "technology":          1.18,
+    "total_profit":        1.20,
+    "consumer_segment":    1.12,
+    "corporate_segment":   1.15,
+    "home_office_segment": 1.10
+  },
+  "profit_margin_target": 0.14,
+  "avg_order_value_target": 800.0
+}
