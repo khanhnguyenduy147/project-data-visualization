@@ -1,0 +1,6 @@
+# Báo cáo (không đẩy lên repo theo yêu cầu)
+BAOCAO.docx
+
+# Python / Jupyter
+__pycache__/
+.ipynb_checkpoints/
