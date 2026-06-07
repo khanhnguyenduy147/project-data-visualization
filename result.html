@@ -51,6 +51,19 @@ tr:last-child td{border-bottom:none}
 .mstat .l{font-size:.6rem;color:var(--t3);text-transform:uppercase}
 .callout{background:var(--amber-bg);border-left:3px solid var(--amber2);border-radius:5px;padding:9px 12px;font-size:.74rem;color:var(--amber);margin-top:10px;line-height:1.5}
 .footer{margin-top:18px;padding-top:12px;border-top:1px solid var(--bd);font-size:.62rem;color:var(--t3);text-align:center;line-height:1.8}
+.info-btn{display:inline-flex;align-items:center;justify-content:center;width:17px;height:17px;border-radius:50%;border:1px solid #bfdbfe;background:var(--blue-bg);color:var(--blue);font-size:.64rem;font-weight:700;cursor:pointer;margin-left:6px;vertical-align:middle;line-height:1;font-family:inherit}
+.info-btn:hover{background:#dbeafe}
+.modal-ov{position:fixed;inset:0;background:rgba(17,24,39,.55);display:none;align-items:center;justify-content:center;z-index:50;padding:20px}
+.modal-ov.open{display:flex}
+.modal{background:var(--card);border-radius:12px;max-width:600px;width:100%;max-height:88vh;overflow-y:auto;padding:22px 26px;box-shadow:0 20px 60px rgba(0,0,0,.3)}
+.modal .close{float:right;font-size:1.5rem;color:var(--t3);cursor:pointer;line-height:1;border:none;background:none;font-family:inherit}
+.modal .close:hover{color:var(--t1)}
+.modal h2{font-size:1.05rem;font-weight:700;margin-bottom:8px}
+.modal h3{font-size:.82rem;font-weight:700;margin:14px 0 5px;color:var(--blue)}
+.modal p{font-size:.75rem;color:var(--t1);line-height:1.65;margin:4px 0}
+.modal ul{margin:5px 0 0 18px}
+.modal li{font-size:.75rem;color:var(--t1);line-height:1.6;margin:3px 0}
+.modal .fml{font-family:'JetBrains Mono',monospace;font-size:.74rem;background:var(--blue-bg);border:1px solid #bfdbfe;border-radius:6px;padding:9px 12px;color:var(--blue);margin:8px 0;display:block}
 @media(max-width:960px){.grid2{grid-template-columns:1fr}}
 </style>
 </head>
@@ -67,7 +80,7 @@ tr:last-child td{border-bottom:none}
 
   <!-- PACE WEIGHT HERO -->
   <div class="card">
-    <div class="card-title">Pace Weight — tiến độ kỳ vọng theo mùa vụ</div>
+    <div class="card-title">Pace Weight — tiến độ kỳ vọng theo mùa vụ<button class="info-btn" onclick="document.getElementById('paceModal').classList.add('open')" title="Pace weight là gì?">?</button></div>
     <div class="card-sub" id="paceSub"></div>
     <div class="hero">
       <div class="hero-num" id="paceNum"></div>
@@ -100,7 +113,7 @@ tr:last-child td{border-bottom:none}
     </div>
     <!-- CAGR JUSTIFY -->
     <div class="card">
-      <div class="card-title">Biện minh mục tiêu tăng trưởng (CAGR)</div>
+      <div class="card-title">Biện minh mục tiêu tăng trưởng (CAGR)<button class="info-btn" onclick="document.getElementById('cagrModal').classList.add('open')" title="CAGR là gì?">?</button></div>
       <div class="card-sub">Mục tiêu vs tăng trưởng kép lịch sử</div>
       <table id="cagrTable"><thead><tr><th>Chỉ số</th><th>CAGR LS</th><th>Mục tiêu</th><th>Đánh giá</th></tr></thead><tbody></tbody></table>
     </div>
@@ -178,6 +191,48 @@ tb('cagrTable').innerHTML = Object.entries(KPI.historical_cagr).map(([k,g])=>{
   return `<tr><td class="name">${names[k]||k}</td><td>${gp==null?'—':(gp>=0?'+':'')+gp.toFixed(1)+'%'}</td>`
     +`<td>+${t.toFixed(1)}%</td><td>${verdict}</td></tr>`;
 }).join('');
+</script>
+
+<!-- POPUP: CAGR hoạt động thế nào -->
+<div class="modal-ov" id="cagrModal" onclick="if(event.target===this)this.classList.remove('open')">
+  <div class="modal">
+    <button class="close" onclick="document.getElementById('cagrModal').classList.remove('open')">×</button>
+    <h2>CAGR hoạt động như thế nào?</h2>
+    <p><b>CAGR (Compound Annual Growth Rate)</b> — tốc độ tăng trưởng kép bình quân mỗi năm, giả định giá trị tăng đều từ mốc đầu đến mốc cuối của giai đoạn.</p>
+    <span class="fml">CAGR = (giá trị cuối ÷ giá trị đầu) ^ (1 / số năm) − 1</span>
+    <p><b>Ví dụ:</b> doanh thu năm đầu 100, sau 3 năm thành 150 → CAGR = (150/100)^(1/3) − 1 ≈ <b>14,5%/năm</b>.</p>
+    <h3>Vì sao dùng ở đây?</h3>
+    <p>Để kiểm tra mục tiêu tăng trưởng nhóm đặt ra có hợp lý so với xu hướng lịch sử không — thay vì là con số áp đặt. Cột <b>CAGR LS</b> là tăng trưởng thực tế các năm đã qua; cột <b>Mục tiêu</b> là kế hoạch nhóm đặt.</p>
+    <h3>Đọc cột “Đánh giá” thế nào? (ngưỡng ±2 điểm %)</h3>
+    <ul>
+      <li>🔴 <b>Tham vọng</b> — mục tiêu cao hơn CAGR lịch sử &gt; 2 điểm %: cần kế hoạch hỗ trợ cụ thể.</li>
+      <li>🟡 <b>Sát LS</b> — mục tiêu nằm trong ±2 điểm % quanh CAGR: bám sát xu hướng, hợp lý.</li>
+      <li>🟢 <b>Thận trọng</b> — mục tiêu thấp hơn CAGR &gt; 2 điểm %: an toàn, có thể đặt cao hơn.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- POPUP: Pace weight hoạt động thế nào -->
+<div class="modal-ov" id="paceModal" onclick="if(event.target===this)this.classList.remove('open')">
+  <div class="modal">
+    <button class="close" onclick="document.getElementById('paceModal').classList.remove('open')">×</button>
+    <h2>Pace weight hoạt động như thế nào?</h2>
+    <p><b>Pace weight</b> là tỷ lệ phần trăm kế hoạch năm mà doanh nghiệp <b>lẽ ra phải đạt được</b> tính đến thời điểm hiện tại, <b>theo phân bổ mùa vụ</b> (không chia đều theo thời gian).</p>
+    <span class="fml">pace_weight = Σ weight(tháng đã xong) + weight(tháng hiện tại) × (ngày đã qua ÷ số ngày trong tháng)</span>
+    <p>Trong đó <b>weight(tháng)</b> = trung bình nhiều năm của tỷ trọng doanh thu tháng đó so với cả năm.</p>
+    <h3>Vì sao theo mùa vụ thay vì chia đều?</h3>
+    <p>Nửa cuối năm là mùa cao điểm. Nếu chia tuyến tính, đến đầu tháng 6 sẽ kỳ vọng ~42,5% kế hoạch → <b>đánh giá sai</b> là đang chậm. Pace weight mùa vụ chỉ ~29,5%, phản ánh đúng rằng phần lớn doanh thu dồn về cuối năm.</p>
+    <h3>Dùng để làm gì?</h3>
+    <p>Nhân với mục tiêu năm để ra <b>mục tiêu tại thời điểm hiện tại</b>: <code>pace_goal = mục tiêu năm × pace_weight</code>. So sánh thực tế với pace_goal cho biết từng nhóm đang <b>vượt / đúng / chậm</b> tiến độ.</p>
+  </div>
+</div>
+
+<script>
+// Đóng mọi popup bằng phím Esc
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape')
+    document.querySelectorAll('.modal-ov.open').forEach(m => m.classList.remove('open'));
+});
 </script>
 </body>
 </html>
