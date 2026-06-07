@@ -212,7 +212,7 @@ body{background:var(--bg);font-family:'Inter',sans-serif;min-height:100vh}
 <div class="grid3">
   <div class="card">
     <div class="card-hd">
-      <span class="card-title">Pace chart — tiến độ vs KPI mùa vụ</span>
+      <span class="card-title">Pace chart — tiến độ doanh thu vs KPI mùa vụ</span>
       <span class="card-tag">% / mục tiêu năm</span>
     </div>
     <div class="pace-list" id="paceList"></div>
@@ -243,7 +243,7 @@ body{background:var(--bg);font-family:'Inter',sans-serif;min-height:100vh}
 <div class="grid-full">
   <div class="card">
     <div class="card-hd">
-      <span class="card-title">Xu hướng doanh thu &amp; lợi nhuận — 2025 vs 2026 (cùng trục)</span>
+      <span class="card-title">Xu hướng doanh thu — 2025 vs 2026</span>
       <div style="display:flex;gap:14px;align-items:center">
         <span style="display:flex;align-items:center;gap:4px;font-size:.63rem;color:var(--t2)"><span style="width:12px;height:3px;background:var(--blue2);border-radius:1px;display:inline-block"></span>DT 2026</span>
         <span style="display:flex;align-items:center;gap:4px;font-size:.63rem;color:var(--t2)"><span style="width:12px;height:3px;background:#bfdbfe;border-radius:1px;display:inline-block"></span>DT 2025</span>
@@ -259,11 +259,11 @@ body{background:var(--bg);font-family:'Inter',sans-serif;min-height:100vh}
 <div class="grid2">
   <div class="card">
     <div class="card-hd">
-      <span class="card-title">Tiến độ theo quý</span>
+      <span class="card-title">Tiến độ doanh thu theo quý</span>
       <span style="font-size:.61rem;color:var(--t3)">so KPI thời điểm tương ứng</span>
     </div>
     <div class="q-row" id="qRow"></div>
-    <div style="font-size:.59rem;color:var(--t3);margin-top:8px">* Q2 chưa kết thúc — so KPI phần quý đã qua đến 05/06</div>
+    <div style="font-size:.59rem;color:var(--t3);margin-top:8px">* Q2 chưa kết thúc — chỉ số KPI được tính tới ngày 06/06</div>
   </div>
   <div class="card">
     <div class="card-hd">
@@ -357,7 +357,7 @@ D.kpi_cards.filter(c=>KPI_IDS.includes(c.id)).forEach((c,i)=>{
       <span class="kpi-yoy ${yoy>0.3?'up':yoy<-0.3?'dn':'fl'}">${yoy>0?'↑':'↓'}${Math.abs(yoy).toFixed(1)}% vs 2025</span>
       <div class="kpi-targets">
         ${hasPace ? `KPI h/tại: <b>${ff(c.pace_goal, c.format)}</b>` : ''}
-        ${c.annual_goal ? `<br>KH năm: <b>${ff(c.annual_goal, c.format)}</b>` : ''}
+        ${c.annual_goal ? `<br>KPI năm: <b>${ff(c.annual_goal, c.format)}</b>` : ''}
       </div>
       ${vsPace !== null ? `<div class="kpi-vs ${isOk ? 'ok' : 'warn'}">${isOk ? 'Đang bám KPI' : 'Lệch KPI'} ${vsStr}</div>` : ''}
     </div>`;
@@ -471,10 +471,10 @@ D.quarterly.forEach(q=>{
     <div class="q-val">${has&&actual>0?fc(actual):'—'}</div>
     <div class="q-meta">
       KPI h/tại: <span>${pg>0?fc(pg):'—'}</span><br>
-      KH quý: <span>${fc(ag)}</span><br>
+      KPI quý: <span>${fc(ag)}</span><br>
       2025: <span>${fc(prev)}</span>
     </div>
-    ${dp!==null?`<div class="q-diff ${dp>=-1?'pos':'neg'}">${dp>=0?'+':''}${dp.toFixed(1)}%${isQ2?' *':''}</div>`:`<div class="q-diff pend">Chưa có</div>`}
+    ${dp!==null?`<div class="q-diff ${dp>=-1?'pos':'neg'}">So với KPI ${dp>=0?'+':''}${dp.toFixed(1)}%${isQ2?' *':''}</div>`:`<div class="q-diff pend">Chưa có</div>`}
     <div class="q-bar"><div class="q-fill" style="width:${pct}%;background:${has?(dp!==null&&dp>=-1?'#3b82f6':'#d97706'):'#d1d5db'}"></div></div>`;
   qr.appendChild(el);
 });
