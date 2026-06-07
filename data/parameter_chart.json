@@ -72,12 +72,12 @@
   "bullet_points": [
     {
       "icon": "📈",
-      "text": "Doanh thu YTD vượt tiến độ mùa vụ 0.7 điểm % — +7.4% so cùng kỳ 2025",
+      "text": "Doanh thu YTD vượt tiến độ KPI 0.7 điểm % — +7.4% so cùng kỳ 2025",
       "status": "positive"
     },
     {
       "icon": "🏆",
-      "text": "Home Office dẫn đầu: 38.4% kế hoạch năm, vượt tiến độ +8.7 điểm % so kỳ vọng mùa vụ",
+      "text": "Home Office dẫn đầu: 38.4% kế hoạch năm, vượt tiến độ +8.7 điểm % so kỳ vọng KPI",
       "status": "positive"
     },
     {
@@ -87,7 +87,7 @@
     },
     {
       "icon": "✅",
-      "text": "Biên LN 15.3% — vượt mục tiêu 14%  |  Giá trị đơn TB $215 (↓ KPI $800)",
+      "text": "Biên LN 15.3% — vượt mục tiêu 14%  |  Giá trị đơn TB $215 (↓ KPI $300)",
       "status": "positive"
     }
   ],
