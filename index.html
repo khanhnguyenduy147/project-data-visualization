@@ -197,9 +197,9 @@ body{background:var(--bg);font-family:'Inter',sans-serif;min-height:100vh}
 
 <!-- NAV -->
 <nav class="nav">
-  <a href="index.html" class="active">📊 Dashboard</a>
-  <a href="analyse.html">🔍 Phân tích (EDA)</a>
-  <a href="result.html">🎯 Kết quả &amp; Pace</a>
+  <a href="index.html" class="active">Dashboard</a>
+  <a href="analyse.html">Phân tích (EDA)</a>
+  <a href="result.html">Kết quả &amp; Pace</a>
 </nav>
 
 <!-- ALERT STRIP -->
@@ -328,21 +328,38 @@ const kr = document.getElementById('kpiRow');
 D.kpi_cards.filter(c=>KPI_IDS.includes(c.id)).forEach((c,i)=>{
   const yoy = c.yoy!==undefined ? c.yoy : ((c.value-c.prev_value)/c.prev_value*100);
   const hasPace = c.pace_goal!==null && c.pace_goal!==undefined;
-  const vsPace = hasPace ? (c.value-c.pace_goal)/c.pace_goal*100 : null;
-  const el=document.createElement('div');
-  el.className='kpi';
-  const vsStr = vsPace!==null ? (vsPace>=0?`+${vsPace.toFixed(1)}%`:`${vsPace.toFixed(1)}%`) : '';
-  el.innerHTML=`
+
+  // Biên LN (percent): so sánh điểm %, không dùng % thay đổi
+  const isPercent = c.format === 'percent';
+  const vsPace = hasPace
+    ? isPercent
+      ? (c.value - c.pace_goal)                        // đơn vị: pt
+      : (c.value - c.pace_goal) / c.pace_goal * 100    // đơn vị: %
+    : null;
+
+  const vsStr = vsPace !== null
+    ? isPercent
+      ? (vsPace >= 0 ? `+${vsPace.toFixed(1)}pt` : `${vsPace.toFixed(1)}pt`)
+      : (vsPace >= 0 ? `+${vsPace.toFixed(1)}%`  : `${vsPace.toFixed(1)}%`)
+    : '';
+
+  // Ngưỡng ok/warn: percent dùng ±0.5pt, còn lại dùng ±2%
+  const threshold = isPercent ? -0.5 : -2;
+  const isOk = vsPace !== null ? vsPace >= threshold : true;
+
+  const el = document.createElement('div');
+  el.className = 'kpi';
+  el.innerHTML = `
     <div class="kpi-accent" style="background:${KPI_ACCENTS[i]}"></div>
     <div class="kpi-lbl">${c.label}</div>
-    <div class="kpi-val">${ff(c.value,c.format)}</div>
+    <div class="kpi-val">${ff(c.value, c.format)}</div>
     <div class="kpi-foot">
       <span class="kpi-yoy ${yoy>0.3?'up':yoy<-0.3?'dn':'fl'}">${yoy>0?'↑':'↓'}${Math.abs(yoy).toFixed(1)}% vs 2025</span>
       <div class="kpi-targets">
-        ${hasPace?`KPI h/tại: <b>${ff(c.pace_goal,c.format)}</b>`:''}
-        ${c.annual_goal?`<br>KH năm: <b>${ff(c.annual_goal,c.format)}</b>`:''}
+        ${hasPace ? `KPI h/tại: <b>${ff(c.pace_goal, c.format)}</b>` : ''}
+        ${c.annual_goal ? `<br>KH năm: <b>${ff(c.annual_goal, c.format)}</b>` : ''}
       </div>
-      ${vsPace!==null?`<div class="kpi-vs ${vsPace>=-2?'ok':'warn'}">${vsPace>=-2?'Đang bám KPI':'Lệch KPI'} ${vsStr}</div>`:''}
+      ${vsPace !== null ? `<div class="kpi-vs ${isOk ? 'ok' : 'warn'}">${isOk ? 'Đang bám KPI' : 'Lệch KPI'} ${vsStr}</div>` : ''}
     </div>`;
   kr.appendChild(el);
 });
