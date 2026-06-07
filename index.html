@@ -187,19 +187,19 @@ body{background:var(--bg);font-family:'Inter',sans-serif;min-height:100vh}
 <div class="hdr">
   <div>
     <div class="hdr-title">SuperStore — Báo cáo điều hành 2026</div>
-    <div class="hdr-sub">Năm tài chính 2026 &nbsp;·&nbsp; YTD đến 05/06/2026 &nbsp;·&nbsp; KPI điều chỉnh mùa vụ: <span id="paceWt" style="font-family:'JetBrains Mono',monospace;font-weight:600;color:var(--t1)"></span> kế hoạch năm</div>
+    <div class="hdr-sub">Năm tài chính 2026 &nbsp;·&nbsp; YTD đến 06/06/2026 &nbsp;·&nbsp; Chỉ số KPI hiện tại cần đạt: <span id="paceWt" style="font-family:'JetBrains Mono',monospace;font-weight:600;color:var(--t1)"></span> kế hoạch năm</div>
   </div>
   <div class="hdr-right">
-    <div class="live-badge"><span class="live-dot"></span><span>05/06/2026</span></div>
+    <div class="live-badge"><span class="live-dot"></span><span>07/06/2026</span></div>
     <span class="status-badge" id="overallBadge"></span>
   </div>
 </div>
 
 <!-- NAV -->
 <nav class="nav">
-  <a href="index.html" class="active">📊 Dashboard</a>
-  <a href="analyse.html">🔍 Phân tích (EDA)</a>
-  <a href="result.html">🎯 Kết quả &amp; Pace</a>
+  <a href="index.html" class="active">Dashboard</a>
+  <a href="analyse.html">Phân tích (EDA)</a>
+  <a href="result.html">Kết quả &amp; Pace</a>
 </nav>
 
 <!-- ALERT STRIP -->
@@ -212,7 +212,7 @@ body{background:var(--bg);font-family:'Inter',sans-serif;min-height:100vh}
 <div class="grid3">
   <div class="card">
     <div class="card-hd">
-      <span class="card-title">Pace chart — tiến độ vs KPI mùa vụ</span>
+      <span class="card-title">Pace chart — tiến độ doanh thu vs KPI mùa vụ</span>
       <span class="card-tag">% / mục tiêu năm</span>
     </div>
     <div class="pace-list" id="paceList"></div>
@@ -243,7 +243,7 @@ body{background:var(--bg);font-family:'Inter',sans-serif;min-height:100vh}
 <div class="grid-full">
   <div class="card">
     <div class="card-hd">
-      <span class="card-title">Xu hướng doanh thu &amp; lợi nhuận — 2025 vs 2026 (cùng trục)</span>
+      <span class="card-title">Xu hướng doanh thu — 2025 vs 2026</span>
       <div style="display:flex;gap:14px;align-items:center">
         <span style="display:flex;align-items:center;gap:4px;font-size:.63rem;color:var(--t2)"><span style="width:12px;height:3px;background:var(--blue2);border-radius:1px;display:inline-block"></span>DT 2026</span>
         <span style="display:flex;align-items:center;gap:4px;font-size:.63rem;color:var(--t2)"><span style="width:12px;height:3px;background:#bfdbfe;border-radius:1px;display:inline-block"></span>DT 2025</span>
@@ -259,11 +259,11 @@ body{background:var(--bg);font-family:'Inter',sans-serif;min-height:100vh}
 <div class="grid2">
   <div class="card">
     <div class="card-hd">
-      <span class="card-title">Tiến độ theo quý</span>
+      <span class="card-title">Tiến độ doanh thu theo quý</span>
       <span style="font-size:.61rem;color:var(--t3)">so KPI thời điểm tương ứng</span>
     </div>
     <div class="q-row" id="qRow"></div>
-    <div style="font-size:.59rem;color:var(--t3);margin-top:8px">* Q2 chưa kết thúc — so KPI phần quý đã qua đến 05/06</div>
+    <div style="font-size:.59rem;color:var(--t3);margin-top:8px">* Q2 chưa kết thúc — chỉ số KPI được tính tới ngày 06/06</div>
   </div>
   <div class="card">
     <div class="card-hd">
@@ -289,8 +289,8 @@ body{background:var(--bg);font-family:'Inter',sans-serif;min-height:100vh}
 
 <script type="module">
 const [D, KPI] = await Promise.all([
-  fetch('../data/parameter_chart.json').then(r=>r.json()),
-  fetch('../data/kpi.json').then(r=>r.json())
+  fetch('./data/parameter_chart.json').then(r=>r.json()),
+  fetch('./data/kpi.json').then(r=>r.json())
 ]);
 
 const fc = v => {
@@ -328,21 +328,38 @@ const kr = document.getElementById('kpiRow');
 D.kpi_cards.filter(c=>KPI_IDS.includes(c.id)).forEach((c,i)=>{
   const yoy = c.yoy!==undefined ? c.yoy : ((c.value-c.prev_value)/c.prev_value*100);
   const hasPace = c.pace_goal!==null && c.pace_goal!==undefined;
-  const vsPace = hasPace ? (c.value-c.pace_goal)/c.pace_goal*100 : null;
-  const el=document.createElement('div');
-  el.className='kpi';
-  const vsStr = vsPace!==null ? (vsPace>=0?`+${vsPace.toFixed(1)}%`:`${vsPace.toFixed(1)}%`) : '';
-  el.innerHTML=`
+
+  // Biên LN (percent): so sánh điểm %, không dùng % thay đổi
+  const isPercent = c.format === 'percent';
+  const vsPace = hasPace
+    ? isPercent
+      ? (c.value - c.pace_goal)                        // đơn vị: pt
+      : (c.value - c.pace_goal) / c.pace_goal * 100    // đơn vị: %
+    : null;
+
+  const vsStr = vsPace !== null
+    ? isPercent
+      ? (vsPace >= 0 ? `+${vsPace.toFixed(1)}pt` : `${vsPace.toFixed(1)}pt`)
+      : (vsPace >= 0 ? `+${vsPace.toFixed(1)}%`  : `${vsPace.toFixed(1)}%`)
+    : '';
+
+  // Ngưỡng ok/warn: percent dùng ±0.5pt, còn lại dùng ±2%
+  const threshold = isPercent ? -0.5 : -2;
+  const isOk = vsPace !== null ? vsPace >= threshold : true;
+
+  const el = document.createElement('div');
+  el.className = 'kpi';
+  el.innerHTML = `
     <div class="kpi-accent" style="background:${KPI_ACCENTS[i]}"></div>
     <div class="kpi-lbl">${c.label}</div>
-    <div class="kpi-val">${ff(c.value,c.format)}</div>
+    <div class="kpi-val">${ff(c.value, c.format)}</div>
     <div class="kpi-foot">
       <span class="kpi-yoy ${yoy>0.3?'up':yoy<-0.3?'dn':'fl'}">${yoy>0?'↑':'↓'}${Math.abs(yoy).toFixed(1)}% vs 2025</span>
       <div class="kpi-targets">
-        ${hasPace?`KPI h/tại: <b>${ff(c.pace_goal,c.format)}</b>`:''}
-        ${c.annual_goal?`<br>KH năm: <b>${ff(c.annual_goal,c.format)}</b>`:''}
+        ${hasPace ? `KPI h/tại: <b>${ff(c.pace_goal, c.format)}</b>` : ''}
+        ${c.annual_goal ? `<br>KPI năm: <b>${ff(c.annual_goal, c.format)}</b>` : ''}
       </div>
-      ${vsPace!==null?`<div class="kpi-vs ${vsPace>=-2?'ok':'warn'}">${vsPace>=-2?'Đang bám KPI':'Lệch KPI'} ${vsStr}</div>`:''}
+      ${vsPace !== null ? `<div class="kpi-vs ${isOk ? 'ok' : 'warn'}">${isOk ? 'Đang bám KPI' : 'Lệch KPI'} ${vsStr}</div>` : ''}
     </div>`;
   kr.appendChild(el);
 });
@@ -454,10 +471,10 @@ D.quarterly.forEach(q=>{
     <div class="q-val">${has&&actual>0?fc(actual):'—'}</div>
     <div class="q-meta">
       KPI h/tại: <span>${pg>0?fc(pg):'—'}</span><br>
-      KH quý: <span>${fc(ag)}</span><br>
+      KPI quý: <span>${fc(ag)}</span><br>
       2025: <span>${fc(prev)}</span>
     </div>
-    ${dp!==null?`<div class="q-diff ${dp>=-1?'pos':'neg'}">${dp>=0?'+':''}${dp.toFixed(1)}%${isQ2?' *':''}</div>`:`<div class="q-diff pend">Chưa có</div>`}
+    ${dp!==null?`<div class="q-diff ${dp>=-1?'pos':'neg'}">So với KPI ${dp>=0?'+':''}${dp.toFixed(1)}%${isQ2?' *':''}</div>`:`<div class="q-diff pend">Chưa có</div>`}
     <div class="q-bar"><div class="q-fill" style="width:${pct}%;background:${has?(dp!==null&&dp>=-1?'#3b82f6':'#d97706'):'#d1d5db'}"></div></div>`;
   qr.appendChild(el);
 });

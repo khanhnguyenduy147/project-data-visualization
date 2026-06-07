@@ -1,7 +1,7 @@
 {
   "_note": "Chỉnh growth_targets → chạy lại notebook → dashboard tự cập nhật",
   "year": 2026,
-  "cutoff_date": "2026-06-05",
+  "cutoff_date": "2026-06-06",
   "growth_targets": {
     "total_revenue": 1.15,
     "furniture": 1.1,
@@ -11,16 +11,6 @@
     "consumer_segment": 1.12,
     "corporate_segment": 1.15,
     "home_office_segment": 1.1
-  },
-  "historical_cagr": {
-    "total_revenue": 0.1483,
-    "furniture": 0.1107,
-    "office_supplies": 0.1748,
-    "technology": 0.1574,
-    "total_profit": 0.2355,
-    "consumer_segment": 0.0764,
-    "corporate_segment": 0.2349,
-    "home_office_segment": 0.2113
   },
   "annual_goals": {
     "total_revenue": 700586,
@@ -33,21 +23,16 @@
     "home_office_segment": 115759
   },
   "pace_goals": {
-    "total_revenue": 206900,
-    "furniture": 64614,
-    "office_supplies": 60840,
-    "technology": 78884,
-    "total_profit": 28987,
-    "consumer_segment": 98192,
-    "corporate_segment": 70338,
-    "home_office_segment": 34186
+    "total_revenue": 208382,
+    "furniture": 65077,
+    "office_supplies": 61276,
+    "technology": 79449,
+    "total_profit": 29195,
+    "consumer_segment": 98895,
+    "corporate_segment": 70842,
+    "home_office_segment": 34431
   },
-  "seasonality_years": [
-    2023,
-    2024,
-    2025
-  ],
-  "monthly_weights": {
+  "monthly_weights_2025": {
     "1": 0.032821,
     "2": 0.024151,
     "3": 0.094066,
@@ -61,8 +46,8 @@
     "11": 0.151396,
     "12": 0.15402
   },
-  "pace_weight": 0.295324,
-  "pace_weight_pct": 29.532,
+  "pace_weight": 0.297439,
+  "pace_weight_pct": 29.744,
   "formula": "pace_goal = annual_goal × [Σ weight(T1..T_prev) + weight(T_cur) × day/days_in_month]",
   "profit_margin_target": 0.14,
   "avg_order_value_target": 800.0
