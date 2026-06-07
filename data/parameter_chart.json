@@ -5,7 +5,12 @@
     "prev_year": 2025,
     "pace_weight": 0.297439,
     "pace_weight_pct": 29.744,
-    "pace_formula": "Σ weight(T1-T5) + weight(T6) × (6/30)"
+    "pace_formula": "Σ weight(T1-T5) + weight(T6) × (6/30)",
+    "seasonality_years": [
+      2023,
+      2024,
+      2025
+    ]
   },
   "kpi_cards": [
     {
@@ -53,8 +58,8 @@
       "label": "Giá trị đơn TB",
       "value": 215.0,
       "prev_value": 257.0,
-      "annual_goal": 800,
-      "pace_goal": 800,
+      "annual_goal": 300,
+      "pace_goal": 300,
       "yoy": -16.3,
       "format": "currency"
     },
@@ -72,12 +77,12 @@
   "bullet_points": [
     {
       "icon": "📈",
-      "text": "Doanh thu YTD vượt tiến độ KPI 0.7 điểm % — +7.4% so cùng kỳ 2025",
+      "text": "Doanh thu YTD vượt tiến độ mùa vụ 0.7 điểm % — +7.4% so cùng kỳ 2025",
       "status": "positive"
     },
     {
       "icon": "🏆",
-      "text": "Home Office dẫn đầu: 38.4% kế hoạch năm, vượt tiến độ +8.7 điểm % so kỳ vọng KPI",
+      "text": "Home Office dẫn đầu: 38.4% kế hoạch năm, vượt tiến độ +8.7 điểm % so kỳ vọng mùa vụ",
       "status": "positive"
     },
     {

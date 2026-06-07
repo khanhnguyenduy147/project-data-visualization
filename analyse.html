@@ -36,7 +36,7 @@ body{background:var(--bg);font-family:'Inter',sans-serif;min-height:100vh}
 table{width:100%;border-collapse:collapse;font-size:.72rem}
 th{text-align:right;font-size:.6rem;color:var(--t3);text-transform:uppercase;letter-spacing:.04em;padding:5px 6px;border-bottom:1px solid var(--bd)}
 th:first-child,td:first-child{text-align:left}
-td{padding:5px 6px;border-bottom:1px solid #f1f5f9;font-family:'JetBrains Mono',monospace}
+td{text-align:right;padding:5px 6px;border-bottom:1px solid #f1f5f9;font-family:'JetBrains Mono',monospace}
 td.name{font-family:'Inter',sans-serif;font-weight:500}
 tr:last-child td{border-bottom:none}
 .neg{color:var(--red2)}.pos{color:var(--green2,#16a34a)}
@@ -112,7 +112,10 @@ tr:last-child td{border-bottom:none}
 </div>
 
 <script type="module">
-const A = await fetch('analysis.json').then(r=>r.json());
+const [A, D] = await Promise.all([
+  fetch('analysis.json').then(r=>r.json()),
+  fetch('data/parameter_chart.json').then(r=>r.json()),
+]);
 const fc = v => { const a=Math.abs(v), s=v<0?'-':''; if(a>=1e6)return s+'$'+(a/1e6).toFixed(1)+'M'; if(a>=1e3)return s+'$'+(a/1e3).toFixed(0)+'K'; return s+'$'+a.toFixed(0); };
 const el = id => document.getElementById(id);
 const tb = id => el(id).querySelector('tbody');
@@ -165,10 +168,17 @@ tb('subTable').innerHTML = A.subcategory_margin.map(r=>{
 
 // Seasonality
 const s = A.seasonality;
-el('seasonSub').innerHTML = `Trọng số doanh thu (%) từng tháng theo năm — chênh lệch lớn nhất chỉ <b>${s.max_spread_pct} điểm %</b> (${s.max_spread_month}) ⇒ mùa vụ khá ổn định.`;
+// Năm hiện tại chưa hoàn chỉnh: từ tháng đang chạy (partial_month) trở đi là dữ liệu tương lai → "--"
+const curYear = D._meta.curr_year;
+const cutM    = D.monthly_trend.partial_month;
+el('seasonSub').innerHTML = `Trọng số doanh thu (%) từng tháng theo năm — chênh lệch lớn nhất chỉ <b>${s.max_spread_pct} điểm %</b> (${s.max_spread_month}) ⇒ mùa vụ khá ổn định. `
+  + `Năm ${curYear} chỉ có dữ liệu đến hết T${cutM-1} (T${cutM} trở đi chưa kết thúc → hiển thị "--").`;
 el('seasonHead').innerHTML = '<th>Năm</th>' + Array.from({length:12},(_,i)=>`<th>T${i+1}</th>`).join('');
 tb('seasonTable').innerHTML = s.years.map(y=>
-  `<tr><td class="name">${y}</td>` + s.weights_by_year[y].map(w=>`<td>${w}</td>`).join('') + `</tr>`).join('');
+  `<tr><td class="name">${y}</td>` + s.weights_by_year[y].map((w,i)=>{
+    const future = (Number(y) === Number(curYear)) && (i + 1 >= cutM);
+    return `<td>${future ? '--' : w}</td>`;
+  }).join('') + `</tr>`).join('');
 </script>
 </body>
 </html>
