@@ -1,7 +1,7 @@
 {
   "_note": "Chỉnh growth_targets → chạy lại notebook → dashboard tự cập nhật",
   "year": 2026,
-  "cutoff_date": "2026-06-06",
+  "cutoff_date": "2026-06-14",
   "growth_targets": {
     "total_revenue": 1.15,
     "furniture": 1.1,
